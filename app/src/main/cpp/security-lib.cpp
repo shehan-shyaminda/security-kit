@@ -196,7 +196,7 @@ bool checkEmulatorProcesses() {
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_ipay_securitykit_NativeHelper_checkFridaServer(
+Java_com_codelabs_securitymodule_NativeHelper_checkFridaServer(
         JNIEnv *env,
         jobject /* this */) {
     return isFridaServerDetected() ? JNI_TRUE : JNI_FALSE;
@@ -204,19 +204,19 @@ Java_com_ipay_securitykit_NativeHelper_checkFridaServer(
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_ipay_securitykit_NativeHelper_checkObjectionInjected(JNIEnv* env, jobject /* this */) {
+Java_com_codelabs_securitymodule_NativeHelper_checkObjectionInjected(JNIEnv* env, jobject /* this */) {
     return isObjectionInjected() ? JNI_TRUE : JNI_FALSE;
 }
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_ipay_securitykit_NativeHelper_checkMagiskMounted(JNIEnv* env, jobject /* this */) {
+Java_com_codelabs_securitymodule_NativeHelper_checkMagiskMounted(JNIEnv* env, jobject /* this */) {
     return (isMagiskMountDetected() || isMagiskSocketPresent() || isMagiskPropertySet()) ? JNI_TRUE : JNI_FALSE;
 }
 
 //extern "C"
 //JNIEXPORT jboolean JNICALL
-//Java_com_ipay_securitykit_NativeHelper_isApktoolArtifactPresent(JNIEnv* env, jobject /* this */, jobject assetManager) {
+//Java_com_codelabs_securitymodule_NativeHelper_isApktoolArtifactPresent(JNIEnv* env, jobject /* this */, jobject assetManager) {
 //    AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
 //    if (!mgr) return JNI_FALSE;
 //
