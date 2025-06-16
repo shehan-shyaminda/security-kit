@@ -13,7 +13,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ipay.securitykit"
+    namespace = "com.codelabs.securitykit"
     compileSdk = 35
 
     defaultConfig {
@@ -67,14 +67,13 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-
-                groupId = "com.codelabs"
-                artifactId = "security-kit"
-                version = "1.0.7"
+                groupId = "com.github.shehan-shyaminda"
+                artifactId = "iPaySecurityKit"
+                version = "1.0.14"
 
                 pom {
                     name.set("iPay Security Kit")
-                    description.set("Security Library for iPay Applicaitons")
+                    description.set("Security Library for iPay Applications")
                     url.set("https://github.com/shehan-shyaminda/security-kit")
 
                     licenses {
@@ -98,12 +97,6 @@ afterEvaluate {
                         url.set("https://github.com/shehan-shyaminda/security-kit")
                     }
                 }
-            }
-        }
-        repositories {
-            maven {
-                name = "iPay Security Kit"
-                url = uri("https://maven.pkg.github.com/shehan-shyaminda/security-kit")
             }
         }
     }
