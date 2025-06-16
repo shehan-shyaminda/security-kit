@@ -70,7 +70,7 @@ afterEvaluate {
 
                 groupId = "com.codelabs"
                 artifactId = "security-kit"
-                version = "1.0.9"
+                version = "1.0.8"
 
                 pom {
                     name.set("iPay Security Kit")
