@@ -59,28 +59,24 @@ class SecurityUtils(private val context: Context) {
     }
 
     fun isSignatureValid(knownSignature: String): Boolean {
-        return try {
-            val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                context.packageManager.getPackageInfo(
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            try {
+                val signatures = context.packageManager.getPackageInfo(
                     context.packageName,
                     PackageManager.GET_SIGNING_CERTIFICATES
                 ).signingInfo?.apkContentsSigners
-            } else {
-                context.packageManager.getPackageInfo(
-                    context.packageName,
-                    PackageManager.GET_SIGNATURES
-                ).signatures
-            }
 
-            val currentSignature = packageInfo?.firstOrNull()?.toByteArray()?.let { bytes ->
-                val md = MessageDigest.getInstance("SHA-256")
-                val digest = md.digest(bytes)
-                Base64.encodeToString(digest, Base64.NO_WRAP)
+                val currentSignature = signatures?.firstOrNull()?.toByteArray()?.let { bytes ->
+                    val md = MessageDigest.getInstance("SHA-256")
+                    val digest = md.digest(bytes)
+                    Base64.encodeToString(digest, Base64.NO_WRAP)
+                }
+                currentSignature == knownSignature
+            } catch (e: Exception) {
+                false
             }
-
-            currentSignature == knownSignature
-        } catch (e: Exception) {
-            false
+        } else {
+            true
         }
     }
 

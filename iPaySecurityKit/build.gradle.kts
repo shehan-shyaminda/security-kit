@@ -1,3 +1,10 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val properties = Properties()
+val localPropsFile = FileInputStream("local.properties")
+properties.load(localPropsFile)
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -62,7 +69,7 @@ afterEvaluate {
 
                 groupId = "com.codelabs"
                 artifactId = "security-kit"
-                version = "1.0.6"
+                version = "1.0.7"
 
                 pom {
                     name.set("iPay Security Kit")
@@ -97,8 +104,8 @@ afterEvaluate {
                 name = "iPay Security Kit"
                 url = uri("https://maven.pkg.github.com/shehan-shyaminda/security-kit")
                 credentials {
-                    username = "shehan-shyaminda"
-                    password = "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"
+                    username = properties["USERNAME"].toString()
+                    password = properties["TOKEN"].toString()
                 }
             }
         }
