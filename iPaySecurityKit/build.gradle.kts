@@ -104,10 +104,6 @@ afterEvaluate {
             maven {
                 name = "iPay Security Kit"
                 url = uri("https://maven.pkg.github.com/shehan-shyaminda/security-kit")
-                credentials {
-                    username = "shehan-shyaminda"
-                    password = "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"
-                }
             }
         }
     }
