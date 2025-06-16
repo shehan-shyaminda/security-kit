@@ -10,17 +10,9 @@ android {
 
     defaultConfig {
         minSdk = 23
-        lint.targetSdk = 34
-        version = "1.0.1"
-
-        externalNativeBuild {
-            cmake {
-                cppFlags += ""
-            }
-        }
 
         ndk {
-            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86_64")
         }
     }
     buildFeatures {
@@ -42,24 +34,24 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     ndkVersion = "26.1.10909125"
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    implementation("com.scottyab:rootbeer-lib:0.1.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(platform(libs.kotlin.bom))
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.rootbeer.lib)
 }
 
 afterEvaluate {
@@ -70,7 +62,7 @@ afterEvaluate {
 
                 groupId = "com.codelabs"
                 artifactId = "security-kit"
-                version = "1.0.0"
+                version = "1.0.6"
 
                 pom {
                     name.set("iPay Security Kit")
@@ -97,6 +89,16 @@ afterEvaluate {
                         developerConnection.set("scm:git:ssh://github.com:shehan-shyaminda/security-kit.git")
                         url.set("https://github.com/shehan-shyaminda/security-kit")
                     }
+                }
+            }
+        }
+        repositories {
+            maven {
+                name = "iPay Security Kit"
+                url = uri("https://maven.pkg.github.com/shehan-shyaminda/security-kit")
+                credentials {
+                    username = "shehan-shyaminda"
+                    password = "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"
                 }
             }
         }

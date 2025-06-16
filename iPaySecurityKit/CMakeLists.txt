@@ -3,6 +3,8 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+project(iPaySecurityKit LANGUAGES C CXX)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 
 add_library(security-lib SHARED

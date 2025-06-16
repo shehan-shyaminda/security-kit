@@ -37,6 +37,12 @@ android {
     buildFeatures {
         compose = true
     }
+
+    lint {
+        disable += setOf(
+            "NullSafeMutableLiveData"
+        )
+    }
 }
 
 dependencies {
@@ -56,5 +62,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    lintChecks(libs.kotlin.gradle.plugin)
     implementation(project(":iPaySecurityKit"))
 }
