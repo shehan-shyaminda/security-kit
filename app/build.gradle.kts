@@ -1,40 +1,26 @@
-import java.util.Properties
-
-val localProps = Properties()
-val localPropsFile = rootProject.file("local.properties")
-if (localPropsFile.exists()) {
-    localProps.load(localPropsFile.inputStream())
-}
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("maven-publish")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.ipay.securitykit"
+    namespace = "com.codelabs.securitymodule"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 23
+        applicationId = "com.codelabs.securitymodule"
+        minSdk = 24
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
 
-        ndk {
-            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86_64")
-        }
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures {
-        buildConfig = true
-        resValues = true
-    }
-    externalNativeBuild {
-        cmake {
-            path = file("CMakeLists.txt")
-        }
-    }
+
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -42,73 +28,40 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
-    ndkVersion = "26.1.10909125"
+    buildFeatures {
+        compose = true
+    }
+
+    lint {
+        disable += setOf(
+            "NullSafeMutableLiveData"
+        )
+    }
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
-    implementation(platform(libs.kotlin.bom))
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.rootbeer.lib)
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.codelabs"
-                artifactId = "security-kit"
-                version = "1.0.8"
-
-                pom {
-                    name.set("iPay Security Kit")
-                    description.set("Security Library for iPay Applicaitons")
-                    url.set("https://github.com/shehan-shyaminda/security-kit")
-
-                    licenses {
-                        license {
-                            name.set("The Apache License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id.set("shehan-shyaminda")
-                            name.set("Dinuka Shehan")
-                            email.set("shehan.shyaminda@gmail.com")
-                        }
-                    }
-
-                    scm {
-                        connection.set("scm:git:git://github.com/shehan-shyaminda/security-kit.git")
-                        developerConnection.set("scm:git:ssh://github.com:shehan-shyaminda/security-kit.git")
-                        url.set("https://github.com/shehan-shyaminda/security-kit")
-                    }
-                }
-            }
-        }
-        repositories {
-            maven {
-                name = "iPay Security Kit"
-                url = uri("https://maven.pkg.github.com/shehan-shyaminda/security-kit")
-                credentials {
-                    username = "shehan-shyaminda"
-                    password = "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"
-                }
-            }
-        }
-    }
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    lintChecks(libs.kotlin.gradle.plugin)
+    implementation(project(":iPaySecurityKit"))
 }

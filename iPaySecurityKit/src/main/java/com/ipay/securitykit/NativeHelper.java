@@ -1,5 +1,7 @@
-package com.codelabs.securitymodule;
+package com.ipay.securitykit;
 
+
+import android.content.res.AssetManager;
 
 public class NativeHelper {
 

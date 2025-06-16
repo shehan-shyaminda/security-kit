@@ -1,4 +1,4 @@
-package com.codelabs.securitymodule
+package com.ipay.securitykit
 
 import android.content.Context
 import android.content.pm.PackageManager
