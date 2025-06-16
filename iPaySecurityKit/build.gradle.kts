@@ -1,9 +1,10 @@
-import java.io.FileInputStream
 import java.util.Properties
 
-val properties = Properties()
-val localPropsFile = FileInputStream("local.properties")
-properties.load(localPropsFile)
+val localProps = Properties()
+val localPropsFile = rootProject.file("local.properties")
+if (localPropsFile.exists()) {
+    localProps.load(localPropsFile.inputStream())
+}
 
 plugins {
     id("com.android.library")
@@ -104,8 +105,8 @@ afterEvaluate {
                 name = "iPay Security Kit"
                 url = uri("https://maven.pkg.github.com/shehan-shyaminda/security-kit")
                 credentials {
-                    username = properties["USERNAME"].toString()
-                    password = properties["TOKEN"].toString()
+                    username = "shehan-shyaminda"
+                    password = "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"
                 }
             }
         }
