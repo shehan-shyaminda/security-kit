@@ -1,2 +1,5 @@
+jdk:
+  - openjdk17
+
 install:
-  - ./gradlew :iPaySecurityKit:publishToMavenLocal
+  - ./gradlew :iPaySecurityKit:publishReleasePublicationToMavenDirectory
