@@ -22,5 +22,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "security-kit"
-include(":iPaySecurityKit")
+include(":security-kit")
 include(":app")

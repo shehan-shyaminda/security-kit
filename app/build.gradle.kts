@@ -62,5 +62,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     lintChecks(libs.kotlin.gradle.plugin)
-    implementation(project(":iPaySecurityKit"))
+    implementation(project(":security-kit"))
 }
