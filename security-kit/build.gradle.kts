@@ -64,13 +64,15 @@ dependencies {
     implementation(libs.rootbeer.lib)
 }
 
-afterEvaluate {
+publishing {
     android.libraryVariants.forEach() { variant ->
         publishing.publications.create<MavenPublication>(variant.name) {
-            from(components["release"])
             groupId = "com.github.shehan-shyaminda"
             artifactId = "iPaySecurityKit"
-            version = "1.0.29"
+            version = "1.0.31"
         }
+    }
+    repositories {
+        mavenLocal()
     }
 }
