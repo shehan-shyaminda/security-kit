@@ -6,10 +6,12 @@ if (localPropsFile.exists()) {
     localProps.load(localPropsFile.inputStream())
 }
 
+group = "com.github.shehan-shyaminda"
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.vanniktech.maven.publish") version "0.28.0"
+    id("maven-publish")
 }
 
 android {
@@ -62,28 +64,47 @@ dependencies {
     implementation(libs.rootbeer.lib)
 }
 
-mavenPublishing {
-    pom {
-        name.set("iPay Security Kit")
-        description.set("Security Library for iPay Applications")
-        url.set("https://github.com/shehan-shyaminda/security-kit")
-        licenses {
-            license {
-                name.set("The Apache License, Version 2.0")
-                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                name = "jitpack"
+                url = uri("$buildDir/repo")
             }
         }
-        developers {
-            developer {
-                id.set("shehan-shyaminda")
-                name.set("Dinuka Shehan")
-                email.set("shehan.shyaminda@gmail.com")
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.shehan-shyaminda"
+                artifactId = "iPaySecurityKit"
+
+                pom {
+                    name.set("iPay Security Kit")
+                    description.set("Security Library for iPay Applications")
+                    url.set("https://github.com/shehan-shyaminda/security-kit")
+
+                    licenses {
+                        license {
+                            name.set("The Apache License, Version 2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set("shehan-shyaminda")
+                            name.set("Dinuka Shehan")
+                            email.set("shehan.shyaminda@gmail.com")
+                        }
+                    }
+
+                    scm {
+                        connection.set("scm:git:git://github.com/shehan-shyaminda/security-kit.git")
+                        developerConnection.set("scm:git:ssh://github.com:shehan-shyaminda/security-kit.git")
+                        url.set("https://github.com/shehan-shyaminda/security-kit")
+                    }
+                }
             }
-        }
-        scm {
-            connection.set("scm:git:git://github.com/shehan-shyaminda/security-kit.git")
-            developerConnection.set("scm:git:ssh://github.com:shehan-shyaminda/security-kit.git")
-            url.set("https://github.com/shehan-shyaminda/security-kit")
         }
     }
 }
