@@ -1,4 +1,4 @@
 jdk:
-  - openjdk17jdk:
+  - openjdk17
 install:
   - ./gradlew :iPaySecurityKit:publish
