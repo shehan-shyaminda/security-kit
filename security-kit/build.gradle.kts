@@ -69,7 +69,7 @@ publishing {
         publishing.publications.create<MavenPublication>(variant.name) {
             groupId = "com.github.shehan-shyaminda"
             artifactId = "iPaySecurityKit"
-            version = "1.0.31"
+            version = "1.0.32"
         }
     }
     repositories {
