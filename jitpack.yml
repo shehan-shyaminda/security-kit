@@ -1,9 +1,2 @@
 jdk:
   - openjdk17
-
-before_install:
-  - /scripts/prepareJitpackEnvironment
-  -
-install:
-  - FILE="-Dfile=security-kit-release.aar"
-  - mvn install:install-file $FILE -DgroupId=com.github.shehan-shyaminda -DartifactId=security-kit -Dversion=1.0.32 -Dpackaging=aar -DgeneratePom=true

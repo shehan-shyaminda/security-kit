@@ -68,8 +68,8 @@ publishing {
     android.libraryVariants.forEach() { variant ->
         publishing.publications.create<MavenPublication>(variant.name) {
             groupId = "com.github.shehan-shyaminda"
-            artifactId = "iPaySecurityKit"
-            version = "1.0.32"
+            artifactId = "security-kit"
+            version = "1.0.33"
         }
     }
     repositories {
