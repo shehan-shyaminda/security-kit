@@ -77,7 +77,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.shehan-shyaminda"
                 artifactId = "iPaySecurityKit"
-                version = "1.0.28"
+                version = "1.0.29"
 
                 pom {
                     name.set("iPay Security Kit")
